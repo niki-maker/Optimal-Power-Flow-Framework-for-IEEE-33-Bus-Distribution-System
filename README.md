@@ -35,26 +35,23 @@ Three distributed generators are modeled:
 
 Each generator operates within predefined limits:
 
-\[
-P_i^{min} \le P_i \le P_i^{max}
-\]
+P_i_min <= P_i <= P_i_max
 
 ---
 
 ## 3. OPF Problem Formulation
 
-The OPF is formulated as a multi-objective optimization problem:
+The OPF problem is formulated as a weighted multi-objective function:
 
-\[
-J = w_1 P_{loss} + w_2 P_{slack} + w_3 V_{dev}
-\]
+J = w1 * P_loss + w2 * P_slack + w3 * V_dev
 
 Where:
 
-- \(P_{loss}\): Total real power loss (kW)  
-- \(P_{slack}\): Slack bus real power import (kW)  
-- \(V_{dev} = \sum |V_k - 1.0|\): Cumulative voltage deviation  
-- \(w_1, w_2, w_3\): Weighting coefficients  
+- **P_loss** : Total real power loss in the network (kW)  
+- **P_slack** : Real power imported from the slack bus (kW)  
+- **V_dev** : Cumulative voltage deviation, calculated as  
+  V_dev = Σ |V_k − 1.0|  
+- **w1, w2, w3** : Weighting coefficients representing the relative importance of each objective
 
 ---
 
@@ -73,33 +70,7 @@ The algorithm iteratively searches for the dispatch that minimizes the composite
 
 ---
 
-## 5. Results Summary
-
-### 5.1 Optimal Generator Dispatch
-
-| Generator | Bus | Optimal Output |
-|------------|------|----------------|
-| PV         | 18   | 1400 kW        |
-| Wind       | 25   | 1500 kW        |
-| Diesel     | 30   | 1000 kW        |
-
-### 5.2 Performance Comparison
-
-| Metric | Base Case | OPF Case |
-|--------|------------|------------|
-| Slack Bus Power | 31.03 kW | 1.82 kW |
-| Real Power Loss | 188.82 kW | 178.29 kW |
-| Voltage Deviation | 4.4154 pu | 4.0822 pu |
-
-### 5.3 Voltage Limits
-
-- Minimum Voltage: 0.9958 pu (Bus 22)  
-- Maximum Voltage: 1.0531 pu (Bus 33)  
-- All buses remain within acceptable operating limits  
-
----
-
-## 6. Software and Tools
+## 5. Software and Tools
 
 - Python  
 - OpenDSS  
@@ -108,14 +79,14 @@ The algorithm iteratively searches for the dispatch that minimizes the composite
 
 ---
 
-## 7. Installation and Execution
+## 6. Installation and Execution
 
-### 7.1 Prerequisites
+### 6.1 Prerequisites
 
 - Docker Desktop  
 - Python 3.x (if running outside container)  
 
-### 7.2 Clone Repository
+### 6.2 Clone Repository
 
 ```
 # Clone repository
@@ -136,7 +107,7 @@ The OPF routine will execute automatically, and results will be exported to the 
 
 ---
 
-## 8. Key Contributions
+## 7. Key Contributions
 
 - Multi-objective OPF formulation for radial distribution systems  
 - Coordinated DER dispatch strategy  
@@ -146,7 +117,7 @@ The OPF routine will execute automatically, and results will be exported to the 
 
 ---
 
-## 9. Conclusion
+## 8. Conclusion
 
 This project demonstrates the practical implementation of a distribution-level OPF framework for coordinated DER dispatch. The results confirm improved system efficiency, reduced upstream dependency, and enhanced voltage regulation while maintaining operational security.
 
