@@ -1,0 +1,20 @@
+
+services:
+
+  base_network:
+    build:
+      context: .
+      dockerfile: base_network/Dockerfile
+    container_name: base_network
+    ports:
+      - "4006:4006"
+    volumes:
+      - shared_excel_data:/shared_volume
+      - compensator_data:/app/data
+      - ./base_system:/shared_volume_base
+
+volumes:
+  shared_excel_data:
+    name: shared_excel_data
+  compensator_data:
+    name: compensator_data
